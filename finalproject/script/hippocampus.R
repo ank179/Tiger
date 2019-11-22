@@ -16,7 +16,7 @@ anova(hippAnova)
 setwd("/Users/anyakapur/Desktop/Biostat/finalproject/script")
 save()
 
-#making bar plots 
+#making strip charts 
 setwd("/Users/anyakapur/Desktop/Biostat/finalproject/results")
 pdf("hipp_plot.pdf")
 graph <- stripchart(hipp$hippoVolumeRatio ~ hipp$group, data = hipp, method = "jitter",
