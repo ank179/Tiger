@@ -1,20 +1,22 @@
 #changing working directory 
 getwd()
 setwd("/Users/anyakapur/Desktop/Biostat/finalproject/script")
-save.image()
+
 
 #loading data 
 hipp <- read.csv("hippvolume.csv")
 
 #analysis 
 
+setwd("/Users/anyakapur/Desktop/Biostat/finalproject/results")
 hipp$group <- factor(hipp$group, levels = c("no seizures", "no CFS", "CFS")) 
-
 hipp
 hippAnova <- lm(hipp$hippoVolumeRatio ~ group, data = hipp)
 anova(hippAnova)
-setwd("/Users/anyakapur/Desktop/Biostat/finalproject/script")
-save()
+out <- capture.output(anova(hippAnova))
+cat("hippAnova_results", out, file="hippAnova_results.txt", sep="n", append=TRUE)
+
+
 
 #making strip charts 
 setwd("/Users/anyakapur/Desktop/Biostat/finalproject/results")
@@ -25,6 +27,6 @@ graph <- stripchart(hipp$hippoVolumeRatio ~ hipp$group, data = hipp, method = "j
 meanHipVol = tapply(hipp$hippoVolumeRatio, hipp$group, mean)
 segments(x0 = c(1,2,3) - 0.1, y0 = meanHipVol, x1 = c(1,2,3) + 0.1, 
          y1 = meanHipVol, lwd = 2)
-dev.off
+dev.off()
 
 
